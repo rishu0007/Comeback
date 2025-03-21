@@ -28,6 +28,33 @@ app.listen(3000);
 
 */
 
+const express = require('express');
+
+const app = express();
+
+// return boolena if the age of person is more than 14
+const isOldEnoughMiddleware = (req, res, next) => {
+    let age = req.query.age;
+    if(age >= 14) {
+        next();
+    } else {
+        res.json({
+            msg: "sorry not of age yet"
+        });
+    }
+}
+
+app.use(isOldEnoughMiddleware)
+
+app.get('/ride1', (req, res) => {
+    res.json({
+        msg: "successfully riden the ride 1"
+    });
+})
+
+app.listen(3000);
+
+
 // *************** Here we will study about authentications and zod *********************
 
 
@@ -108,6 +135,8 @@ app.listen(3000);
 
 
 // **************** learning Authentication *************************
+
+/*
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -207,3 +236,5 @@ app.get('/users', (req, res) => {
 
 
 app.listen(3000);
+
+*/
